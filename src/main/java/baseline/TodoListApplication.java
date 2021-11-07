@@ -1,0 +1,91 @@
+package baseline;
+
+/*
+ *  UCF COP3330 Summer 2021 Application Assignment 1 Solution
+ *  Copyright 2021 Justin Mazor
+ */
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.Optional;
+
+public class TodoListApplication extends javafx.application.Application {
+
+    private Stage mainStage;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        this.mainStage = stage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TodoList.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        TodoController controller = fxmlLoader.<TodoController>getController();
+        File file = new File("/test");
+        // init and show table
+        Scene scene = new Scene(root, 600, 400);
+
+        stage.setTitle("FXML Welcome");
+        stage.setOnCloseRequest(confirmCloseEventHandler);
+        Button closeButton = new Button("Close Application");
+        closeButton.setOnAction(event ->
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                )
+        );
+
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
+
+    private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
+        Alert closeConfirmation = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to exit?"
+        );
+        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
+                ButtonType.OK
+        );
+        exitButton.setText("Exit");
+        closeConfirmation.setHeaderText("Confirm Exit");
+        closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+        closeConfirmation.initOwner(mainStage);
+
+
+        Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+        if (!ButtonType.OK.equals(closeResponse.get())) {
+            event.consume();
+        }
+    };
+
+    public static void main(String[] args) {
+        launch();
+    }
+    public static void initTest(){
+        launch();
+    }
+
+}
+

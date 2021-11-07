@@ -5,70 +5,106 @@ package baseline;
  *  Copyright 2021 Justin Mazor
  */
 
-import java.util.Date;
-import java.util.List;
+import javafx.scene.control.CheckBox;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class TodoItem {
     private String itemName;
     private String dueDate;
     private String itemDescription;
-    private Boolean completeFlag;
-    private String itemID;
+    private CheckBox flag;
 
-    public TodoItem(String itemName, String dueDate, String itemDescription) {
+    public TodoItem() {
+        itemName = null;
+        dueDate = null;
+        itemDescription = null;
+        flag = new CheckBox();
+    }
+
+    public TodoItem(String itemName, String dueDate, String itemDescription) throws IOException, ParseException, IllegalArgumentException {
         // set this.itemName
+        setItemName(itemName);
         // call  changeDate
+        setDueDate(dueDate);
         // set this.itemDescription
+        setDescription(itemDescription);
         // set completeFlag to false
+        flag = new CheckBox();
+        flag.setAllowIndeterminate(false);
     }
 
-    public void changeName(String itemName) {
+
+    public void setItemName(String itemName) throws IllegalArgumentException {
         // change this.itemName
+        if (itemName.isBlank())
+            throw new IllegalArgumentException();
+        this.itemName = itemName;
     }
 
-    public void editDate(String dueDate) {
+    public void setDueDate(String dueDate) throws ParseException {
         // ensure date is in proper format
         // throw error if wrong format
         // can be empty
         // change this.dueDate
+        // allows for blank due dates
+        if (!dueDate.isEmpty()) {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            format.setLenient(false);
+            format.parse(dueDate);
+        }
+        this.dueDate = dueDate;
+
     }
 
-    public void editDescription(String itemDescription) {
+    public void setDescription(String itemDescription) throws IOException {
         // change this.itemDescription
+        if (itemDescription.length() > 256 || itemDescription.isBlank())
+            throw new IOException();
+        this.itemDescription = itemDescription;
     }
 
-    public void changeFlag() {
-        // change this.completeFlag to !this.completeFlag
-    }
 
-    public String getName() {
+    public String getItemName() {
         // return name
         return itemName;
     }
 
-    public String getDate() {
+    public String getDueDate() {
         // return dueDate
         return dueDate;
     }
 
-    public String getDescription() {
+    public String getItemDescription() {
         // return itemDescription
         return itemDescription;
     }
 
-    public boolean getFlag() {
+    public CheckBox getFlag() {
         // return completeFlag
-        return completeFlag;
+        return this.flag;
     }
 
-    public String getID() {
-        // return itemID
-        return itemID;
+    public void setFlag(CheckBox checkBox) {
+        this.flag =  checkBox;
     }
 
-    public void editID(String ID) {
-        // set this.itemID = ID
+    public boolean compare(TodoItem cmp) {
+        boolean ret = true;
+        if (!this.getItemName().equals(cmp.getItemName()))
+            ret = false;
+        if (!this.getDueDate().equals(cmp.getDueDate()))
+            ret = false;
+        if (!this.getItemDescription().equals(cmp.getItemDescription()))
+            ret = false;
+
+        return ret;
+
     }
+
 
 }
 
