@@ -1,29 +1,29 @@
-* Import List
+# Import List
 Go to File Import List and select previously exported File
-* Export List
+# Export List
 Go to File Export List and choose a file name
-* Mark Completed or Uncompleted
+# Mark Completed or Uncompleted
 Press Checkbox in Table
-* Add Record
+# Add Record
 Type Information into text fields on the bottom and hit add when done
-** Name
+* Name
 Name must exist
-** Date
+* Date
 Date is Optional
 Must be in YYYY-MM-DD Format
-** Description
+* Description
 Description must be between 1 and 256 characters
-* Delete Record
+# Delete Record
 Select a record by clicking on it and then pressing delete
-* Search Records
+# Search Records
 Type in any and all fields and press search. Note, search will be on what completion flags are displayed
-* Display Completed
+# Display Completed
 Go to View Completed Items
-* Display Uncompleted
+# Display Uncompleted
 Go to View Uncompleted Items
-* Display All
+# Display All
 Go to View View All
-* Clear List
+# Clear List
 File Clear List
-* Edit Items
+# Edit Items
 Double Click on entry and hit enter when done
