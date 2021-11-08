@@ -123,7 +123,6 @@ public class TodoList {
                 myWriter.write("\n");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
         // print dataList in csv format
@@ -173,7 +172,6 @@ public class TodoList {
                dataList.add(item);
                item = new TodoItem();
            }
-
         }
     }
 

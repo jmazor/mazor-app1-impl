@@ -5,8 +5,6 @@ package baseline;
  *  Copyright 2021 Justin Mazor
  */
 
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,15 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.util.StringConverter;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class TodoController implements Initializable {
@@ -184,22 +177,17 @@ public class TodoController implements Initializable {
 
     public void setUpItem() {
         // set todoItem to editabale
-        itemName.setCellValueFactory(new PropertyValueFactory<TodoItem, String>("itemName"));
+        itemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         itemName.setCellFactory(TextFieldTableCell.forTableColumn());
-        itemName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TodoItem, String>>() {
-
-            @Override
-            public void handle(TableColumn.CellEditEvent<TodoItem, String> event) {
-                TodoItem test = event.getRowValue();
-                try {
-                    todoList.editName(test, event.getNewValue());
-                }
-                catch (Exception e) {
-                    popupError("Please enter a valid TODO name");
-                }
-                table.refresh();
-
+        itemName.setOnEditCommit(event -> {
+            TodoItem test = event.getRowValue();
+            try {
+                todoList.editName(test, event.getNewValue());
             }
+            catch (Exception e) {
+                popupError("Please enter a valid TODO name");
+            }
+            table.refresh();
         });
         // on todoItem edit call todoList.editName()
     }
@@ -209,21 +197,16 @@ public class TodoController implements Initializable {
             // try catch
             // on todoDate edit call todoList.editDate()
             // on catch complain
-        dueDate.setCellValueFactory(new PropertyValueFactory<TodoItem, String>("dueDate"));
+        dueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         dueDate.setCellFactory(TextFieldTableCell.forTableColumn());
-        dueDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TodoItem, String>>() {
-
-            @Override
-            public void handle(TableColumn.CellEditEvent<TodoItem, String> event) {
-                TodoItem newItem = event.getRowValue();
-                try {
-                    todoList.editDate(newItem, event.getNewValue());
-                }
-                catch (Exception e) {
-                    popupError("Please enter a valid date in YYYY-MM-DD format");
-                    table.refresh();
-                }
-
+        dueDate.setOnEditCommit(event -> {
+            TodoItem newItem = event.getRowValue();
+            try {
+                todoList.editDate(newItem, event.getNewValue());
+            }
+            catch (Exception e) {
+                popupError("Please enter a valid date in YYYY-MM-DD format");
+                table.refresh();
             }
         });
         }
@@ -231,28 +214,24 @@ public class TodoController implements Initializable {
     public void setUpDesc() {
 
         // set todoDesc to editable
-        itemDescription.setCellValueFactory(new PropertyValueFactory<TodoItem, String>("itemDescription"));
+        itemDescription.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));
         itemDescription.setCellFactory(TextFieldTableCell.forTableColumn());
-        itemDescription.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TodoItem, String>>() {
-
-            @Override
-            public void handle(TableColumn.CellEditEvent<TodoItem, String> event) {
-                TodoItem newItem = event.getRowValue();
-                try {
-                    todoList.editDesc(newItem, event.getNewValue());
-                }
-                catch (Exception e) {
-                    popupError("Please enter a valid description of 1 to 256 characters");
-                }
-                table.refresh();
-
-            }
+        itemDescription.setOnEditCommit(event -> {
+            TodoItem newItem = event.getRowValue();
+        try {
+            todoList.editDesc(newItem, event.getNewValue());
+        }
+        catch (Exception e) {
+            popupError("Please enter a valid description of 1 to 256 characters");
+        }
+        table.refresh();
         });
+
         // on todoDesc edit call todoList.editDesc()
     }
 
     public void setUpFlag() {
-        todoFlag.setCellValueFactory(new PropertyValueFactory<TodoItem, CheckBox>("flag"));
+        todoFlag.setCellValueFactory(new PropertyValueFactory<>("flag"));
         todoFlag.setEditable(true);
 
         // make todoFlag an editable Checkbox cell
