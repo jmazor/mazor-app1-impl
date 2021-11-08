@@ -131,21 +131,16 @@ public class TodoList {
 
     public void readData() throws IOException, ParseException {
         List<String> temp = new ArrayList<>();
-        try {
             Scanner myReader = new Scanner(fileName);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 temp.addAll(Arrays.asList(data.split(",")));
             }
             myReader.close();
-        } catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
         inputData(temp);
     }
 
-    public void inputData(List<String> data) throws IOException, ParseException, IllegalArgumentException {
+    private void inputData(List<String> data) throws IOException, ParseException, IllegalArgumentException {
         dataList.clear();
         TodoItem item = new TodoItem();
         int count = 0;

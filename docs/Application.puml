@@ -5,19 +5,18 @@
     -String : itemName
     -Date : dueDate
     -String : itemDescription
-    -Boolean : completeFlag
-    -String : itemID
+    -flag : CheckBox
     +TodoItem(itemName, dueDate, itemDescription)
-    +editName(itemName)
-    +editDate(dueDate)
-    +editDescription(itemDescription)
-    +editID(itemID)
-    +changeFlag(flag)
+    +setItemName(itemName)
+    +setDueDate(dueDate)
+    +setDescription(itemDescription)
+    +setFlag(flag)
 
-    +getID() : String
-    +getName() : String
-    +getDate() : String
-    +getDescription() : String
+    +getItemName() : String
+    +getItemDescription() : String
+    +getFlag() : CheckBox
+    +getDueDate() : String
+    +compare(TodoItem) : boolean
 }
   TodoList o--> TodoItem
   TodoController o--> TodoList
@@ -27,10 +26,9 @@
     -todoList : ObservableList<TodoItem> :
     -fileName : String
 
-    -int getIndex(itemID) : int
-
     +TodoList(inputList, fileName)
     +get(itemID) : TodoItem
+    +add(todoName, todoDate, todoDesc)
     +addTodoItem(TodoItem)
     +changeFlag(index)
     +delete(itemID)
@@ -45,32 +43,18 @@
     +getFileName() : String
     +getCompletedFlags() : ObservableList<TodoItem>
     +getUncompletedFlags() : ObservableList<TodoItem>
+    +clearList()
+    +printToFile()
+    +readData()
+    +search()
+    -inputData()
 
 }
 
-+class OpeningScreenController implements Initializable {
 
-    -String : fileName
-    -Button : createNewList;
-    -Button : exportList;
-    -Button : importList;
-    -ChoiceBox<String> : listChoice;
-    -TextField : newList;
-    -Button : openList;
-
-    -checkImport(importFile) : boolean
-    +handleCreate()
-    +handleOpening()
-    +handleImport()
-    +handleExport()
-
-    +getFileName() : String
-    +initialize(URL location, ResourceBundle resources)
-
-}
 +class TodoController implements Initializable {
     -todoList : TodoList
-    -flaggedItems : ObservableList<TodoItem>
+    -flag : int
     -addButton : Button
     -deleteButton : Button
     -inputDate : TextField
@@ -81,19 +65,18 @@
     -TodoDesc : TableColumn<TodoItem, String>
     -todoFlag : TableColumn<TodoItem, Boolean>
     -todoItem : TableColumn<TodoItem, String>
-    -exitMenu : Menu
     -completedItems : MenuItem
-    -deleteList : MenuItem
-    -changeTitle : MenuItem
-    -viewAll: MenuItem
-    +handleDeleteList()
-    +handleTitle()
-    +handleFlags()
+    -clearList : MenuItem
+    -viewAll : MenuItem
+    -uncompletedItems : MenuItem
+    +handleClearList()
+    +handleCompletedFlags()
     +handleAddButton()
-    +handleDeleteButton()
-    +handleExit()
-    +handleTextChange()
     +handleViewAll()
+    +handleDeleteButton()
+    +handleUncompletedFlags()
+    +handleExportList()
+    +handleSearchButton()
     +setTable(todoList)
     +initialize(URL location, ResourceBundle resources)
 
@@ -101,6 +84,8 @@
     +setUpDate()
     +setUpDesc()
     +setUpFlag()
+    -updateState()
+    -popupError()
 
     +handleTextChange()
     +modifyElement()
