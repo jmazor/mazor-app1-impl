@@ -37,12 +37,10 @@ public class TodoListApplication extends javafx.application.Application {
         this.mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TodoList.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        TodoController controller = fxmlLoader.<TodoController>getController();
-        File file = new File("/test");
         // init and show table
         Scene scene = new Scene(root, 600, 400);
 
-        stage.setTitle("FXML Welcome");
+        stage.setTitle("Todo List");
         stage.setOnCloseRequest(confirmCloseEventHandler);
         Button closeButton = new Button("Close Application");
         closeButton.setOnAction(event ->

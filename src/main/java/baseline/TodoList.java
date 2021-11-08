@@ -150,7 +150,6 @@ public class TodoList {
         TodoItem item = new TodoItem();
         int count = 0;
         for (String test : data) {
-            System.out.println(test);
             ++count;
            count = count % 4;
            if (count == 1) {

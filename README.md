@@ -6,13 +6,10 @@ Go to File Export List and choose a file name
 Press Checkbox in Table
 # Add Record
 Type Information into text fields on the bottom and hit add when done
-* Name
-Name must exist
-* Date
-Date is Optional
+* Name must exist
+* Date is Optional
 Must be in YYYY-MM-DD Format
-* Description
-Description must be between 1 and 256 characters
+* Description  must be between 1 and 256 characters
 # Delete Record
 Select a record by clicking on it and then pressing delete
 # Search Records

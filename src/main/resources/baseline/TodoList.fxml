@@ -22,11 +22,6 @@
                   <MenuItem fx:id="exportList" mnemonicParsing="false" onAction="#handleExportList" text="Export List" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="View">
               <items>
                 <MenuItem fx:id="completedItems" mnemonicParsing="false" onAction="#handleCompletedFlags" text="Completed Items" />

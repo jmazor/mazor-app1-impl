@@ -153,8 +153,6 @@ public class TodoController implements Initializable {
         }
         catch (Exception e) {
             popupError("File is invalid or corrupted");
-
-
         }
         updateState();
     }
